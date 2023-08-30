@@ -105,8 +105,8 @@ function filtrarAuto() {
   console.log(resultado);
 }
 
-function filtrarMarca(auto) {
-  if (datosBusqueda.marca) {
+function filtrarMarca(auto){
+  if (datosBusqueda.marca){
     return auto.marca === datosBusqueda.marca;
   }
   return auto;

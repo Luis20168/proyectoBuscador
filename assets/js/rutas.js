@@ -3,8 +3,7 @@ export const rutas = [
     {
       id: 1,
       nombre: "Ruta del Café Quindiano",
-      minKilometros: 25,
-      maxKilometros: 500,
+      kilometros: 500,
       estado: "Realizada",
       calificacion: 4,
       tipoVia: "Asfalto"
@@ -12,8 +11,7 @@ export const rutas = [
     {
       id: 2,
       nombre: "Senda de la Sierra Nevada",
-      minKilometros: 30,
-      maxKilometros: 800,
+      kilometros: 100,
       estado: "Pendiente",
       calificacion: 3,
       tipoVia: "Trocha"
@@ -21,8 +19,7 @@ export const rutas = [
     {
       id: 3,
       nombre: "Camino de los Tayrona",
-      minKilometros: 40,
-      maxKilometros: 1500,
+      kilometros: 600,
       estado: "Realizada",
       calificacion: 5,
       tipoVia: "Asfalto"
@@ -30,8 +27,7 @@ export const rutas = [
     {
       id: 4,
       nombre: "Ruta de los Llanos Verdes",
-      minKilometros: 22,
-      maxKilometros: 3000,
+      kilometros: 2050,
       estado: "Pendiente",
       calificacion: 2,
       tipoVia: "Asfalto"
@@ -39,8 +35,7 @@ export const rutas = [
     {
       id: 5,
       nombre: "Vía de la Guajira Salvaje",
-      minKilometros: 50,
-      maxKilometros: 6000,
+      kilometros: 1250,
       estado: "Realizada",
       calificacion: 4,
       tipoVia: "Trocha"
@@ -49,8 +44,7 @@ export const rutas = [
     {
       id: 6,
       nombre: "Ruta de los Cañones del Chicamocha",
-      minKilometros: 28,
-      maxKilometros: 400,
+      kilometros: 1000,
       estado: "Realizada",
       calificacion: 5,
       tipoVia: "Asfalto"
@@ -58,8 +52,7 @@ export const rutas = [
     {
       id: 7,
       nombre: "Senda de los Volcanes del Ruiz",
-      minKilometros: 35,
-      maxKilometros: 1200,
+      kilometros: 4500,
       estado: "Pendiente",
       calificacion: 3,
       tipoVia: "Trocha"
@@ -67,8 +60,7 @@ export const rutas = [
     {
       id: 8,
       nombre: "Ruta del Amazonas",
-      minKilometros: 45,
-      maxKilometros: 7500,
+      kilometros: 9000,
       estado: "Pendiente",
       calificacion: 2,
       tipoVia: "Trocha"
@@ -76,8 +68,7 @@ export const rutas = [
     {
       id: 9,
       nombre: "Trayecto de los Nevados",
-      minKilometros: 60,
-      maxKilometros: 9000,
+      kilometros: 800,
       estado: "Realizada",
       calificacion: 4,
       tipoVia: "Asfalto"
@@ -85,8 +76,7 @@ export const rutas = [
     {
       id: 10,
       nombre: "Ruta del Cacao y Oro",
-      minKilometros: 22,
-      maxKilometros: 2000,
+      kilometros: 750,
       estado: "Realizada",
       calificacion: 5,
       tipoVia: "Trocha"
@@ -95,8 +85,7 @@ export const rutas = [
     {
       id: 11,
       nombre: "Sendero de las Cataratas",
-      minKilometros: 28,
-      maxKilometros: 1500,
+      kilometros: 1973,
       estado: "Pendiente",
       calificacion: 4,
       tipoVia: "Trocha"
@@ -104,8 +93,7 @@ export const rutas = [
     {
       id: 12,
       nombre: "Ruta del Valle Verde",
-      minKilometros: 35,
-      maxKilometros: 2500,
+      kilometros: 18,
       estado: "Realizada",
       calificacion: 3,
       tipoVia: "Asfalto"
@@ -113,8 +101,7 @@ export const rutas = [
     {
       id: 13,
       nombre: "Senda de los Páramos Andinos",
-      minKilometros: 40,
-      maxKilometros: 1800,
+      kilometros: 600,
       estado: "Realizada",
       calificacion: 2,
       tipoVia: "Trocha"
@@ -122,8 +109,7 @@ export const rutas = [
     {
       id: 14,
       nombre: "Ruta de los Ríos Transparentes",
-      minKilometros: 22,
-      maxKilometros: 3000,
+      kilometros: 1200,
       estado: "Pendiente",
       calificacion: 5,
       tipoVia: "Asfalto"
@@ -131,8 +117,7 @@ export const rutas = [
     {
       id: 15,
       nombre: "Vía del Pájaro Quetzal",
-      minKilometros: 50,
-      maxKilometros: 5000,
+      kilometros: 10000,
       estado: "Realizada",
       calificacion: 4,
       tipoVia: "Trocha"

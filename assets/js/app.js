@@ -7,9 +7,11 @@ import{rutas} from './rutas.js';
 
 
 document.addEventListener("DOMContentLoaded", ()=>{
+    
     llenaRutas();
     llenarMinimo();
     llenarMaximo();
+    
 });
 
 
@@ -30,8 +32,7 @@ const tipoVia= document.getElementById("tipoVia");
 let infoRutas={
     id: "",
     nombre: "",
-    minKilometros: "",
-    maxKilometros: "",
+    Kilometros: "",
     estado: "",
     calificacion: "",
     tipoVia: ""
@@ -43,6 +44,8 @@ let infoRutas={
 selectRutas.addEventListener('change', (e)=>{
     console.log(e.target.value);
     infoRutas.nombre= e.target.value;   //aqui indrodusco el valor al objeto de datos
+    filtrarNombre();
+    
     
 
     
@@ -51,25 +54,33 @@ selectRutas.addEventListener('change', (e)=>{
 
 selectMinimo.addEventListener('change', (e)=>{
     console.log(e.target.value);
-    infoRutas.minKilometros= parseInt(e.target.value);  //aqui indrodusco el valor al objeto de datos
+    infoRutas.Kilometros= parseInt(e.target.value);  //aqui indrodusco el valor al objeto de datos
+    filtrarMinKilometros();
+   
     
 
     
 
 })
 
-selectMaximo.addEventListener('change', (e)=>{
-    console.log(e.target.value);
-    infoRutas.maxKilometros= parseInt(e.target.value);   //aqui indrodusco el valor al objeto de datos
+// selectMaximo.addEventListener('change', (e)=>{
+//     console.log(e.target.value);
+//     infoRutas= parseInt(e.target.value);   //aqui indrodusco el valor al objeto de datos
     
+    // filtrarMaxKilometros();
 
     
 
-})
+    
+
+// })
 
 estado.addEventListener('change', (e)=>{
     console.log(e.target.value);
     infoRutas.estado= e.target.value;   //aqui indrodusco el valor al objeto de datos
+    
+    filtrarEstado();
+    
     
 
     
@@ -80,6 +91,9 @@ calificacion.addEventListener('change', (e)=>{
     console.log(e.target.value);
     infoRutas.calificacion= parseInt(e.target.value);   //aqui indrodusco el valor al objeto de datos
     
+    filtrarCalificacion();
+    
+    
 
     
 
@@ -88,6 +102,9 @@ calificacion.addEventListener('change', (e)=>{
 tipoVia.addEventListener('change', (e)=>{
     console.log(e.target.value);
     infoRutas.tipoVia= e.target.value;   //aqui indrodusco el valor al objeto de datos
+    FiltrarTipoVia()
+    
+    
     
 
     
@@ -118,8 +135,8 @@ function llenaRutas(){
 function llenarMinimo(){
     for(let i=0; i<rutas.length; i++){
         const option= document.createElement("option");
-        option.innerHTML = rutas[i].minKilometros;
-        option.value= rutas[i].minKilometros;
+        option.innerHTML = rutas[i].kilometros;
+        option.value= rutas[i].kilometros;
         selectMinimo.appendChild(option);
 
 
@@ -132,8 +149,8 @@ function llenarMaximo(){
 
     for(let i=0; i<rutas.length; i++){
         const option= document.createElement("option");
-        option.innerHTML = rutas[i].maxKilometros;
-        option.value= parseInt(rutas[i].maxKilometros);
+        option.innerHTML = rutas[i].kilometros;
+        option.value= parseInt(rutas[i].kilometros);
         selectMaximo.appendChild(option);
 
 
@@ -144,33 +161,33 @@ function llenarMaximo(){
 //fin llenar
 
 
-let allRutas=[];
+
 //buscar
 
-const form= document.getElementById('form');
-form.addEventListener('submit', (e)=>{
-    e.preventDefault();
-    console.log(infoRutas);
-
-    filtrarNombre();
-    filtrarMinKilometros();
-    filtrarMaxKilometros();
-    filtrarEstado();
-    filtrarCalificacion();
-    FiltrarTipoVia();
-
-    console.log(allRutas)
-    
-    mostrar(allRutas);
-    limpia();
-
+// const form= document.getElementById('form');
+// form.addEventListener('submit', (e)=>{
+//     e.preventDefault();
     
 
+//     
+//     
+//     
+//     
+//     
+//     FiltrarTipoVia();
+
+    
+    
+   
+//     // limpia();
+
+    
 
 
 
 
-})
+
+// })
 
 
 
@@ -189,77 +206,119 @@ function limpia(){
 
 
 
+
+
+
 function filtrarNombre(){
-    rutas.filter((ruta)=>{
-        if(ruta.nombre==infoRutas.nombre){
-            console.log(ruta)
-            allRutas= [...allRutas, ruta]
+    const resultado= rutas.filter((ruta)=>{
+        if(ruta.nombre ){
+            return ruta.nombre===infoRutas.nombre
 
         }
+
+        return ruta
     })
+    console.log(resultado);
+
+    
+    
+
+
+    
+    mostrar(resultado)
 }
+
+
 
 
 function filtrarMinKilometros(){
-    rutas.filter((ruta)=>{
-        if(infoRutas.minKilometros==ruta.minKilometros){
-            console.log(ruta)
-            allRutas= [...allRutas, ruta]
+    const resultado= rutas.filter((ruta)=>{
+        if(ruta.kilometros){
+            return ruta.kilometros==infoRutas.kilometros
+            
 
         }
+
+        return ruta
         
     })
+
+    console.log(resultado)
+    mostrar(resultado)
+
+
 }
 
 function filtrarMaxKilometros(){
-    rutas.filter((ruta)=>{
-        if(infoRutas.maxKilometros==ruta.maxKilometros){
-            console.log(ruta)
-            allRutas= [...allRutas, ruta]
+    const resultado= rutas.filter((ruta)=>{
+        if(ruta.maxKilometros){
+            return ruta.maxKilometros===infoRutas.maxKilometros
+            
 
         }
+
+        return ruta
         
     })
+
+    console.log(resultado)
+    mostrar(resultado)
 }
 
 function filtrarEstado(){
-    rutas.filter((ruta)=>{
-        if(ruta.estado== infoRutas.estado){
-            console.log(ruta);
-            allRutas= [...allRutas, ruta]
+    const resultado= rutas.filter((ruta)=>{
+        if(ruta.estado){
+            return ruta.estado===infoRutas.estado
+           
         }
 
+        return ruta
+
     })
+
+    console.log(resultado)
+    mostrar(resultado)
+
+    
 
     
 }
 
 
 function filtrarCalificacion(){
-    rutas.filter((ruta)=>{
-        if(ruta.calificacion==infoRutas.calificacion){
-            console.log(ruta)
-            allRutas= [...allRutas, ruta]
+    const resultado= rutas.filter((ruta)=>{
+        if(ruta.calificacion){
+            return ruta.calificacion===infoRutas.calificacion;
+            
         }
 
-    })       
+        return ruta
+
+    })  
+    console.log(resultado)
+    mostrar(resultado)
+     
 }
 
 function FiltrarTipoVia(){
-    rutas.filter((ruta)=>{
-        if(ruta.tipoVia== infoRutas.tipoVia){
-            console.log(ruta)
-            allRutas= [...allRutas, ruta]
+    const resultado= rutas.filter((ruta)=>{
+        if(ruta.tipoVia){
+            return ruta.tipoVia===infoRutas.tipoVia;
+            
         }
 
+        return ruta
+
     })
+
+    console.log(resultado)
+    mostrar(resultado)
 }
 
 
 //mostrar
-
 const table= document.getElementById("table")
-function mostrar(allRutas){
+function mostrar(resultado){
     
     table.innerHTML=`
         <tr>
@@ -271,14 +330,10 @@ function mostrar(allRutas){
             <td>Tipo de Via</td>
         </tr>`;
 
-    allRutas.forEach((ruta)=>{
+    resultado.forEach((ruta)=>{
 
         const tr= document.createElement("tr");
-        tr.innerHTML = `
-
-        
-
-
+        tr.innerHTML =`
 
 
         <tr>
@@ -290,7 +345,6 @@ function mostrar(allRutas){
             <td>${ruta.tipoVia}</td>
         </tr>
         
-        
         `
 
         table.appendChild(tr);
@@ -299,6 +353,8 @@ function mostrar(allRutas){
 
     
 }
+
+
 
 
 
