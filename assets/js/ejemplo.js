@@ -97,6 +97,8 @@ color.addEventListener("change", (e) => {
   console.log(datosBusqueda);
 });
 
+
+
 function filtrarAuto() {
   console.log("Filtrando por automoviles");
   const resultado = autos.filter(filtrarMarca);
