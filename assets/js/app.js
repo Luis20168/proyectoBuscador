@@ -168,8 +168,8 @@ function filtros() {
         
         const nombreRuta = infoRutas.nombre=="" || ruta.nombre === infoRutas.nombre;
 
-        const minKilometros= infoRutas.minKilometros=="" || ruta.minKilometros >= infoRutas.minKilometros && ruta.maxKilometros <= infoRutas.maxKilometros;
-        const maxKilometros = infoRutas.maxKilometros=="" || ruta.maxKilometros === infoRutas.maxKilometros;
+        const minKilometros= infoRutas.minKilometros=="" || ruta.minKilometros >= infoRutas.minKilometros ;
+        const maxKilometros = infoRutas.maxKilometros=="" || ruta.maxKilometros <= infoRutas.maxKilometros;
         const estado = infoRutas.estado=="" || ruta.estado === infoRutas.estado;
         const calificacion = infoRutas.calificacion=="" || ruta.calificacion === infoRutas.calificacion;
         const tipoVia = infoRutas.tipoVia=="" || ruta.tipoVia === infoRutas.tipoVia;
