@@ -32,7 +32,8 @@ const tipoVia= document.getElementById("tipoVia");
 let infoRutas={
     id: "",
     nombre: "",
-    Kilometros: "",
+    minKilometros: "",
+    maxKilometros: "",
     estado: "",
     calificacion: "",
     tipoVia: ""
@@ -41,10 +42,14 @@ let infoRutas={
 
 //valores de los select
 
+
+
+
 selectRutas.addEventListener('change', (e)=>{
     console.log(e.target.value);
     infoRutas.nombre= e.target.value;   //aqui indrodusco el valor al objeto de datos
-    filtrarNombre();
+    filtros()
+    // allFiltro();
     
     
 
@@ -52,34 +57,28 @@ selectRutas.addEventListener('change', (e)=>{
 
 });
 
-selectMinimo.addEventListener('change', (e)=>{
+selectMinimo.addEventListener('change', (e) => {
     console.log(e.target.value);
-    infoRutas.Kilometros= parseInt(e.target.value);  //aqui indrodusco el valor al objeto de datos
-    filtrarMinKilometros();
-   
-    
+    infoRutas.minKilometros = parseInt(e.target.value);  // Establecer el valor mínimo de kilómetros
+    filtros()
+    // allFiltro();
+});
 
-    
+selectMaximo.addEventListener('change', (e) => {
+    console.log(e.target.value);
+    infoRutas.maxKilometros = parseInt(e.target.value);  // Establecer el valor máximo de kilómetros
+    filtros()
+    // allFiltro();
+});
 
-})
 
-// selectMaximo.addEventListener('change', (e)=>{
-//     console.log(e.target.value);
-//     infoRutas= parseInt(e.target.value);   //aqui indrodusco el valor al objeto de datos
-    
-    // filtrarMaxKilometros();
-
-    
-
-    
-
-// })
 
 estado.addEventListener('change', (e)=>{
     console.log(e.target.value);
     infoRutas.estado= e.target.value;   //aqui indrodusco el valor al objeto de datos
     
-    filtrarEstado();
+    filtros()
+    // allFiltro();
     
     
 
@@ -91,7 +90,8 @@ calificacion.addEventListener('change', (e)=>{
     console.log(e.target.value);
     infoRutas.calificacion= parseInt(e.target.value);   //aqui indrodusco el valor al objeto de datos
     
-    filtrarCalificacion();
+    filtros()
+    // allFiltro();
     
     
 
@@ -102,7 +102,8 @@ calificacion.addEventListener('change', (e)=>{
 tipoVia.addEventListener('change', (e)=>{
     console.log(e.target.value);
     infoRutas.tipoVia= e.target.value;   //aqui indrodusco el valor al objeto de datos
-    FiltrarTipoVia()
+    filtros()
+    // allFiltro();
     
     
     
@@ -112,7 +113,7 @@ tipoVia.addEventListener('change', (e)=>{
 })
 
 
-//fin valores de los select
+
 
 
 
@@ -135,8 +136,8 @@ function llenaRutas(){
 function llenarMinimo(){
     for(let i=0; i<rutas.length; i++){
         const option= document.createElement("option");
-        option.innerHTML = rutas[i].kilometros;
-        option.value= rutas[i].kilometros;
+        option.innerHTML = rutas[i].minKilometros;
+        option.value= rutas[i].minKilometros;
         selectMinimo.appendChild(option);
 
 
@@ -149,8 +150,8 @@ function llenarMaximo(){
 
     for(let i=0; i<rutas.length; i++){
         const option= document.createElement("option");
-        option.innerHTML = rutas[i].kilometros;
-        option.value= parseInt(rutas[i].kilometros);
+        option.innerHTML = rutas[i].maxKilometros;
+        option.value= parseInt(rutas[i].maxKilometros);
         selectMaximo.appendChild(option);
 
 
@@ -158,162 +159,191 @@ function llenarMaximo(){
 
 }
 
-//fin llenar
-
-
-
-//buscar
-
-// const form= document.getElementById('form');
-// form.addEventListener('submit', (e)=>{
-//     e.preventDefault();
-    
-
-//     
-//     
-//     
-//     
-//     
-//     FiltrarTipoVia();
-
-    
-    
-   
-//     // limpia();
-
-    
-
-
-
-
-
-// })
-
-
-
-
-
-function limpia(){
-    for(let i= 0; allRutas.length ; i++){
-        allRutas.pop(i);
-
-    }
-}
-
-
 
 //filtracines
 
 
+function filtros() {
+    const resultado = rutas.filter((ruta) => {
+        
+        const nombreRuta = infoRutas.nombre=="" || ruta.nombre === infoRutas.nombre;
 
+        const minKilometros= infoRutas.minKilometros=="" || ruta.minKilometros >= infoRutas.minKilometros && ruta.maxKilometros <= infoRutas.maxKilometros;
+        const maxKilometros = infoRutas.maxKilometros=="" || ruta.maxKilometros === infoRutas.maxKilometros;
+        const estado = infoRutas.estado=="" || ruta.estado === infoRutas.estado;
+        const calificacion = infoRutas.calificacion=="" || ruta.calificacion === infoRutas.calificacion;
+        const tipoVia = infoRutas.tipoVia=="" || ruta.tipoVia === infoRutas.tipoVia;
 
+        return nombreRuta && minKilometros && maxKilometros && estado && calificacion && tipoVia;
+    });
 
-
-function filtrarNombre(){
-    const resultado= rutas.filter((ruta)=>{
-        if(ruta.nombre ){
-            return ruta.nombre===infoRutas.nombre
-
-        }
-
-        return ruta
-    })
     console.log(resultado);
-
-    
-    
-
-
-    
-    mostrar(resultado)
+    mostrar(resultado);
 }
 
-
-
-
-function filtrarMinKilometros(){
-    const resultado= rutas.filter((ruta)=>{
-        if(ruta.kilometros){
-            return ruta.kilometros==infoRutas.kilometros
-            
-
-        }
-
-        return ruta
+function allFiltro(){
+    const filtro= rutas.filter((ruta)=>{
+        const nombreRuta= rutas.filter((ruta)=>{
+            if(infoRutas.nombre=="" || ruta.nombre === infoRutas.nombre){
+                return ruta
         
-    })
-
-    console.log(resultado)
-    mostrar(resultado)
-
-
-}
-
-function filtrarMaxKilometros(){
-    const resultado= rutas.filter((ruta)=>{
-        if(ruta.maxKilometros){
-            return ruta.maxKilometros===infoRutas.maxKilometros
-            
-
-        }
-
-        return ruta
+            }
         
+        })
+
+        const minKilometros=rutas.filter((ruta)=>{
+            if(infoRutas.minKilometros=""){
+                return ruta.minKilometros >= infoRutas.minKilometros && ruta.maxKilometroskilometros <= infoRutas.maxKilometros;
+
+            }
+            return ruta
+        })
+
+        const maxKilometros= rutas.filter((ruta)=>{
+            if(infoRutas.maxKilometros=""){
+                return ruta.maxKilometros === infoRutas.maxKilometros;
+
+
+            }
+            return ruta
+
+        })
+
+        const estado= rutas.filter((ruta)=>{
+            if(infoRutas.estado=""){
+                return ruta.estado === infoRutas.estado;
+
+            }
+            return ruta
+
+        })
+
+        const calificacion= rutas.filter((ruta)=>{
+            if(infoRutas.calificacion=""){
+                return ruta.calificacion === infoRutas.calificacion;
+
+            }
+            return ruta
+        })
+
+        const tipoVia= rutas.filter((ruta)=>{
+            if(infoRutas.tipoVia=""){
+                return ruta.tipoVia===infoRutas.tipoVia;
+            }
+            return ruta
+        })
+        return nombreRuta && minKilometros && maxKilometros && estado && calificacion && tipoVia
+
     })
 
-    console.log(resultado)
-    mostrar(resultado)
+    mostrar(filtro);
 }
 
-function filtrarEstado(){
-    const resultado= rutas.filter((ruta)=>{
-        if(ruta.estado){
-            return ruta.estado===infoRutas.estado
-           
-        }
-
-        return ruta
-
-    })
-
-    console.log(resultado)
-    mostrar(resultado)
-
+function oldFiltro(){
+    function filtrarNombre(){
+        const resultado= rutas.filter((ruta)=>{
+            if(ruta.nombre ){
+                return ruta.nombre===infoRutas.nombre
+    
+            }
+    
+            return ruta
+        })
+        console.log(resultado);
+    
+        
+        
+    
+    
+        
+        mostrar(resultado)
+    }
+    
+    
+    
+    
+    function filtrarMinKilometros() {
+        const resultado = rutas.filter((ruta) => {
+            if (ruta.kilometros) {
+                return ruta.kilometros >= infoRutas.kilometros && ruta.kilometros <= infoRutas.maxKilometros;
+            }
+            return ruta;
+        });
+    
+        console.log(resultado);
+        mostrar(resultado);
+    }
+    
+    
+    function filtrarMaxKilometros(){
+        const resultado= rutas.filter((ruta)=>{
+            if(ruta.maxKilometros){
+                return ruta.maxKilometros===infoRutas.maxKilometros
+                
+    
+            }
+    
+            return ruta
+            
+        })
+    
+        console.log(resultado)
+        mostrar(resultado)
+    }
+    
+    function filtrarEstado(){
+        const resultado= rutas.filter((ruta)=>{
+            if(ruta.estado){
+                return ruta.estado===infoRutas.estado
+               
+            }
+    
+            return ruta
+    
+        })
+    
+        console.log(resultado)
+        mostrar(resultado)
+    
+        
+    
+        
+    }
+    
+    
+    function filtrarCalificacion(){
+        const resultado= rutas.filter((ruta)=>{
+            if(ruta.calificacion){
+                return ruta.calificacion===infoRutas.calificacion;
+                
+            }
+    
+            return ruta
+    
+        })  
+        console.log(resultado)
+        mostrar(resultado)
+         
+    }
+    
+    function FiltrarTipoVia(){
+        const resultado= rutas.filter((ruta)=>{
+            if(ruta.tipoVia){
+                return ruta.tipoVia===infoRutas.tipoVia;
+                
+            }
+    
+            return ruta
+    
+        })
+    
+        console.log(resultado)
+        mostrar(resultado)
+    }
     
 
-    
 }
 
-
-function filtrarCalificacion(){
-    const resultado= rutas.filter((ruta)=>{
-        if(ruta.calificacion){
-            return ruta.calificacion===infoRutas.calificacion;
-            
-        }
-
-        return ruta
-
-    })  
-    console.log(resultado)
-    mostrar(resultado)
-     
-}
-
-function FiltrarTipoVia(){
-    const resultado= rutas.filter((ruta)=>{
-        if(ruta.tipoVia){
-            return ruta.tipoVia===infoRutas.tipoVia;
-            
-        }
-
-        return ruta
-
-    })
-
-    console.log(resultado)
-    mostrar(resultado)
-}
 
 
 //mostrar
