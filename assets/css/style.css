@@ -104,4 +104,12 @@ table td{
 
 }
 
+.alerta > div{
+    background-color: red;
+    color: white;
+    text-align: center;
+    margin: 10px;
+    padding: 5px;
+    border-radius: 10px;
+}
 

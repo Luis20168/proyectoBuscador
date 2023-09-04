@@ -87,7 +87,7 @@ estado.addEventListener('change', (e)=>{
 })
 
 calificacion.addEventListener('change', (e)=>{
-    console.log(e.target.value);
+    
     infoRutas.calificacion= parseInt(e.target.value);   //aqui indrodusco el valor al objeto de datos
     
     filtros()
@@ -164,6 +164,7 @@ function llenarMaximo(){
 
 
 function filtros() {
+    
     const resultado = rutas.filter((ruta) => {
         
         const nombreRuta = infoRutas.nombre=="" || ruta.nombre === infoRutas.nombre;
@@ -178,6 +179,8 @@ function filtros() {
     });
 
     console.log(resultado);
+
+    
     mostrar(resultado);
 }
 
@@ -349,8 +352,25 @@ function oldFiltro(){
 //mostrar
 const table= document.getElementById("table")
 function mostrar(resultado){
+    if(resultado==''){
+        const div= document.createElement('div');
+        div.textContent= 'Sin resultados';
+        alerta.appendChild(div);
+
+        setTimeout(()=>{
+        alerta.remove();
+
+        }, 1500)
+
+    }
+
+
+
+
+   
+
     
-    table.innerHTML=`
+        table.innerHTML=`
         <tr>
             <td>Nombre de la Ruta</td>
             <td>Minimo de la Ruta</td>
@@ -361,6 +381,9 @@ function mostrar(resultado){
         </tr>`;
 
     resultado.forEach((ruta)=>{
+        
+        
+        
 
         const tr= document.createElement("tr");
         tr.innerHTML =`
@@ -380,6 +403,33 @@ function mostrar(resultado){
         table.appendChild(tr);
 
     })
+        
+    
+    
+   
+
+    
+}
+
+
+const alerta= document.getElementById('alerta')
+
+function alert(){
+    
+   
+
+
+       
+        
+    
+    
+
+   
+
+
+
+
+
 
     
 }
